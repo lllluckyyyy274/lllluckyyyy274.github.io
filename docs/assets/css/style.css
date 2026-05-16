@@ -166,14 +166,23 @@ a {
     font-weight: 700;
 }
 
-.theme-toggle {
+.theme-toggle,
+.btn-outline {
     padding: 10px 16px;
     border: none;
     border-radius: 999px;
+    height: 40px;
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.theme-toggle {
     background: #fff;
     color: #2e3e5c;
     box-shadow: 0 10px 30px rgba(20, 30, 60, 0.08);
-    cursor: pointer;
 }
 
 .btn {
@@ -496,13 +505,18 @@ footer {
     }
 
     .nav-links {
-        gap: 16px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
         margin: 0;
-        flex-shrink: 0;
+        flex: 1 1 auto;
+        min-width: 0;
     }
 
     .nav-links a {
         font-size: 13px;
+        white-space: nowrap;
+        flex-shrink: 1;
     }
 
     .nav-actions {
@@ -510,6 +524,7 @@ footer {
         justify-content: flex-end;
         gap: 8px;
         margin-left: auto;
+        flex-shrink: 0;
     }
 
     .nav-actions::before {
@@ -517,9 +532,19 @@ footer {
         margin-right: 8px;
     }
 
-    .theme-toggle {
+    .theme-toggle,
+    .btn-outline {
         padding: 6px 12px;
         font-size: 12px;
+        border-radius: 999px;
+        height: 36px;
+        min-height: 36px;
+        line-height: 1.2;
+    }
+
+    .theme-toggle {
+        padding-left: 12px;
+        padding-right: 12px;
     }
 
     .btn {
