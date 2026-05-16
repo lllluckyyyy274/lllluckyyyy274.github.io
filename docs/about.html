@@ -27,7 +27,7 @@
             <p>专注UI视觉设计、品牌形象设计、智能硬件视觉全案创作，擅长极简科技风与年轻化品牌视觉塑造。</p>
 
             <h2>专业技能</h2>
-            <p>PS / AI / PT / Gigma / Blender / Rhino / Keyshot / Unity / </p>
+            <p>PS / AI / PT / Gigma / Blender / Rhino / Keyshot / Unity </p>
             <p>品牌形象 / 视觉规范 / UI设计 / 3D建模</p>
 
             <h2>联系方式</h2>
@@ -48,12 +48,23 @@
 
     <script>
         const themeToggle = document.getElementById('themeToggle');
+        const savedTheme = window.localStorage.getItem('theme');
+        const isDarkMode = savedTheme === 'dark';
+        const updateTheme = (dark) => {
+            document.body.classList.toggle('dark-theme', dark);
+            if (themeToggle) {
+                themeToggle.textContent = dark ? '白天' : '夜间';
+                themeToggle.setAttribute('aria-label', dark ? '切换至白天模式' : '切换至夜间模式');
+            }
+        };
+        if (savedTheme) {
+            updateTheme(isDarkMode);
+        }
         if (themeToggle) {
             themeToggle.addEventListener('click', () => {
-                document.body.classList.toggle('dark-theme');
-                const isDark = document.body.classList.contains('dark-theme');
-                themeToggle.textContent = isDark ? '白天' : '夜间';
-                themeToggle.setAttribute('aria-label', isDark ? '切换至白天模式' : '切换至夜间模式');
+                const nextDark = !document.body.classList.contains('dark-theme');
+                window.localStorage.setItem('theme', nextDark ? 'dark' : 'light');
+                updateTheme(nextDark);
             });
         }
     </script>

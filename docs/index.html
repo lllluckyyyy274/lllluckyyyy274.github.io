@@ -26,7 +26,8 @@
                 <p class="eyebrow">你好，我是</p>
                 <h1>刘恪洋</h1>
                 <p class="hero-lead">设计源于需求，归于实用，设计不止是视觉美化，更是兼顾审美、体验与落地的问题解决方式。</p>
-                <p class="hero-description">注重落地·善于复盘·主动沟通·细节把控</p>
+                <p class="hero-description">注重落地·善于复盘·主动沟通·细节把控
+                </p>
 
                 <div class="hero-actions">
                     <a href="works.html" class="btn btn-primary">浏览作品</a>
@@ -62,13 +63,25 @@
 
     <script>
         const themeToggle = document.getElementById('themeToggle');
-        const root = document.documentElement;
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-theme');
-            const isDark = document.body.classList.contains('dark-theme');
-            themeToggle.textContent = isDark ? '白天' : '夜间';
-            themeToggle.setAttribute('aria-label', isDark ? '切换至白天模式' : '切换至夜间模式');
-        });
+        const savedTheme = window.localStorage.getItem('theme');
+        const isDarkMode = savedTheme === 'dark';
+        const updateTheme = (dark) => {
+            document.body.classList.toggle('dark-theme', dark);
+            if (themeToggle) {
+                themeToggle.textContent = dark ? '白天' : '夜间';
+                themeToggle.setAttribute('aria-label', dark ? '切换至白天模式' : '切换至夜间模式');
+            }
+        };
+        if (savedTheme) {
+            updateTheme(isDarkMode);
+        }
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                const nextDark = !document.body.classList.contains('dark-theme');
+                window.localStorage.setItem('theme', nextDark ? 'dark' : 'light');
+                updateTheme(nextDark);
+            });
+        }
     </script>
 </body>
 </html>
