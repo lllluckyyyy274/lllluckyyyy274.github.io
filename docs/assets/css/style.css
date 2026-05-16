@@ -101,6 +101,50 @@ a {
     border-radius: 2px;
 }
 
+/* 作品次级导航 */
+.project-nav {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 0;
+    margin: 20px auto 0;
+    justify-content: center;
+}
+
+.project-nav-item {
+    position: relative;
+    font-size: 15px;
+    color: #51607a;
+    transition: color 0.2s;
+    padding-bottom: 8px;
+}
+
+.project-nav-item::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background: #2563eb;
+    border-radius: 999px;
+    transition: width 0.25s ease;
+}
+
+.project-nav-item:hover {
+    color: #0f172a;
+}
+
+.project-nav-item:hover::after,
+.project-nav-item.active::after {
+    width: 100%;
+}
+
+.project-nav-item.active {
+    color: #0f172a;
+    font-weight: 600;
+}
+
 .theme-toggle {
     padding: 10px 16px;
     border: none;
@@ -410,17 +454,63 @@ footer {
 
 @media screen and (max-width: 700px) {
     .topbar {
-        flex-direction: column;
-        align-items: flex-start;
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+        padding: 8px 12px;
+        flex-wrap: nowrap;
+    }
+
+    .nav-logo {
+        width: 44px;
+        height: 44px;
+        font-size: 10px;
+        flex-shrink: 0;
     }
 
     .nav-links {
-        gap: 18px;
+        gap: 16px;
+        margin: 0;
+        flex-shrink: 0;
+    }
+
+    .nav-links a {
+        font-size: 13px;
     }
 
     .nav-actions {
-        width: 100%;
-        justify-content: space-between;
+        width: auto;
+        justify-content: flex-end;
+        gap: 8px;
+        margin-left: auto;
+    }
+
+    .nav-actions::before {
+        height: 24px;
+        margin-right: 8px;
+    }
+
+    .theme-toggle {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+
+    .btn {
+        padding: 8px 16px;
+        font-size: 12px;
+    }
+
+    .project-nav {
+        gap: 16px;
+        margin-top: 16px;
+        overflow-x: auto;
+        padding-bottom: 8px;
+    }
+
+    .project-nav-item {
+        font-size: 13px;
+        white-space: nowrap;
+        flex-shrink: 0;
     }
 
     .hero-copy h1 {
