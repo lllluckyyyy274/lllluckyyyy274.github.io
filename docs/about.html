@@ -8,12 +8,16 @@
 </head>
 <body>
     <div class="container">
-        <nav>
+        <nav class="topbar">
             <div class="nav-logo">Portfolio</div>
             <div class="nav-links">
                 <a href="index.html">首页</a>
-                <a href="works.html">作品集</a>
+                <a href="works.html">作品</a>
                 <a href="about.html">关于我</a>
+            </div>
+            <div class="nav-actions">
+                <a href="https://github.com" class="btn btn-outline">GitHub ↗</a>
+                <button id="themeToggle" class="theme-toggle" aria-label="切换主题">夜间</button>
             </div>
         </nav>
 
@@ -22,16 +26,32 @@
             <p>专注UI视觉设计、品牌形象设计、智能硬件视觉全案创作，擅长极简科技风与年轻化品牌视觉塑造。</p>
 
             <h2>专业技能</h2>
-            <p>Figma / 品牌LOGO设计 / 视觉规范 / APP UI设计 / 作品集排版</p>
+            <p>Figma / 品牌LOGO设计 / 视觉规范 / APP UI设计 / 3D建模</p>
 
             <h2>联系方式</h2>
-            <p>微信：l13231095084</p>
-            <p>邮箱：l13231095084@163.com</p>
+            <p>微信：xxxxxxx</p>
+            <p>邮箱：xxxxxxx@qq.com</p>
+
+            <h2>工作经历</h2>
+            <p>2020 - 2023 | XX设计公司 | UI设计师</p>
+            <p>2018 - 2020 | XX广告公司 | 平面设计师</p>
         </div>
     </div>
 
     <footer>
-        © 2026 liukeyang All Rights Reserved
+        © 2025 All Rights Reserved
     </footer>
+
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('dark-theme');
+                const isDark = document.body.classList.contains('dark-theme');
+                themeToggle.textContent = isDark ? '白天' : '夜间';
+                themeToggle.setAttribute('aria-label', isDark ? '切换至白天模式' : '切换至夜间模式');
+            });
+        }
+    </script>
 </body>
 </html>

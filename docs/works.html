@@ -8,12 +8,16 @@
 </head>
 <body>
     <div class="container">
-        <nav>
+        <nav class="topbar">
             <div class="nav-logo">Portfolio</div>
             <div class="nav-links">
                 <a href="index.html">首页</a>
-                <a href="works.html">作品集</a>
+                <a href="works.html">作品</a>
                 <a href="about.html">关于我</a>
+            </div>
+            <div class="nav-actions">
+                <a href="https://github.com" class="btn btn-outline">GitHub ↗</a>
+                <button id="themeToggle" class="theme-toggle" aria-label="切换主题">夜间</button>
             </div>
         </nav>
 
@@ -43,8 +47,8 @@
             <a href="mojiang.html" class="work-card">
                 <img src="assets/images/mojiang-thumb.png" alt="墨匠品牌">
                 <div class="work-info">
-                    <h3>墨匠品牌 · 牛肉礼盒包装设计</h3>
-                    <p>品牌视觉 / 高端礼盒 / 国潮质感</p>
+                    <h3>墨匠 · 牛肉礼盒包装设计</h3>
+                    <p>品牌视觉 / 高端礼盒 / 质感</p>
                 </div>
             </a>
 
@@ -52,7 +56,7 @@
             <a href="idriver.html" class="work-card">
                 <img src="assets/images/idriver-thumb.png" alt="idriver">
                 <div class="work-info">
-                    <h3>idriver · 新能源汽车控制APP</h3>
+                    <h3>idriver · 汽车控制APP</h3>
                     <p>UI设计 / 车联网 / 智能控制界面</p>
                 </div>
             </a>
@@ -63,5 +67,17 @@
     <footer>
         © 2025 All Rights Reserved
     </footer>
+
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('dark-theme');
+                const isDark = document.body.classList.contains('dark-theme');
+                themeToggle.textContent = isDark ? '白天' : '夜间';
+                themeToggle.setAttribute('aria-label', isDark ? '切换至白天模式' : '切换至夜间模式');
+            });
+        }
+    </script>
 </body>
 </html>

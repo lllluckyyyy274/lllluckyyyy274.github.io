@@ -8,24 +8,67 @@
 </head>
 <body>
     <div class="container">
-        <nav>
+        <nav class="topbar">
             <div class="nav-logo">Portfolio</div>
             <div class="nav-links">
                 <a href="index.html">首页</a>
-                <a href="works.html">作品集</a>
+                <a href="works.html">作品</a>
                 <a href="about.html">关于我</a>
+            </div>
+            <div class="nav-actions">
+                <a href="https://github.com/lllluckyyyy274" class="btn btn-outline">GitHub ↗</a>
+                <button id="themeToggle" class="theme-toggle" aria-label="切换主题">夜间</button>
             </div>
         </nav>
 
         <section class="hero">
-            <h1>刘恪洋</h1>
-            <p>UI视觉设计 / 品牌全案 / 智能硬件视觉设计</p>
-            <a href="works.html" class="btn">浏览作品</a>
+            <div class="hero-copy">
+                <p class="eyebrow">你好，我是</p>
+                <h1>刘恪洋</h1>
+                <p class="hero-lead">设计源于需求，归于实用，设计不止是视觉美化，更是兼顾审美、体验与落地的问题解决方式。</p>
+                <p class="hero-description">我相信太好了设计应该是两者：真是令人愉快以及解决现实世界挑战。</p>
+
+                <div class="hero-actions">
+                    <a href="works.html" class="btn btn-primary">浏览作品</a>
+                </div>
+
+                <div class="profile-card">
+                    <div class="profile-avatar">L</div>
+                    <div>
+                        <div class="profile-name">@liukeyang</div>
+                        <div class="profile-note">创意设计 · 交互体验</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="visual-frame">
+                    <span class="visual-label">Gradientshub</span>
+                    <img src="assets/images/mypicture.jpg" alt="展示图">
+                    <span class="visual-chip">Funnel Display</span>
+                    <div class="visual-bar">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
         </section>
     </div>
 
     <footer>
-        © 2026 liu keyang All Rights Reserved
+        © 2025 All Rights Reserved
     </footer>
+
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const root = document.documentElement;
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+            const isDark = document.body.classList.contains('dark-theme');
+            themeToggle.textContent = isDark ? '白天' : '夜间';
+            themeToggle.setAttribute('aria-label', isDark ? '切换至白天模式' : '切换至夜间模式');
+        });
+    </script>
 </body>
 </html>
