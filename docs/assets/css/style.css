@@ -24,11 +24,14 @@ a {
 }
 
 .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 99;
     display: flex;
     align-items: center;
     gap: 20px;
     padding: 12px 20px;
-    margin: 12px 0 0;
+    margin: 20px auto 12px;
     background: rgba(255,255,255,0.06);
     border-radius: 28px;
     box-shadow: 0 10px 30px rgba(2,6,23,0.35);
@@ -114,7 +117,7 @@ a {
 .project-nav-item {
     position: relative;
     font-size: 15px;
-    color: #51607a;
+    color: #1f2937;
     transition: color 0.2s;
     padding-bottom: 8px;
 }
@@ -132,7 +135,7 @@ a {
 }
 
 .project-nav-item:hover {
-    color: #0f172a;
+    color: #111827;
 }
 
 .project-nav-item:hover::after,
@@ -142,7 +145,25 @@ a {
 
 .project-nav-item.active {
     color: #0f172a;
-    font-weight: 600;
+    font-weight: 700;
+}
+
+.dark-theme .project-nav-item {
+    color: #cbd5e1;
+}
+
+.dark-theme .project-nav-item:hover {
+    color: #f8fafc;
+}
+
+.dark-theme .project-nav-item::after,
+.dark-theme .project-nav-item.active::after {
+    background: #60a5fa;
+}
+
+.dark-theme .project-nav-item.active {
+    color: #ffffff;
+    font-weight: 700;
 }
 
 .theme-toggle {
@@ -230,6 +251,12 @@ a {
     border-color: rgba(255, 255, 255, 0.1);
     background: rgba(255, 255, 255, 0.05);
     color: #e5e7eb;
+}
+
+.dark-theme .work-card {
+    background: rgba(15, 23, 42, 0.96);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .dark-theme .hero-lead,
@@ -562,7 +589,7 @@ footer {
 }
 
 .work-info p {
-    color: #666;
+    color: #8d8d8d;
     font-size: 14px;
 }
 
@@ -588,7 +615,7 @@ footer {
 }
 
 .project-content p {
-    color: #444;
+    color: #7e7e7e;
     margin-bottom: 15px;
 }
 
