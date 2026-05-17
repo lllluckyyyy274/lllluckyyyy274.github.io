@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>个人作品集 | UI品牌设计师</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/logoloop.css">
 </head>
 <body>
     <div class="container">
@@ -33,20 +34,20 @@
                     <a href="works.html" class="btn btn-primary">浏览作品</a>
                 </div>
 
-                <div class="profile-card">
+                <a href="about.html" class="profile-card">
                     <div class="profile-avatar">L</div>
                     <div>
                         <div class="profile-name">@liukeyang</div>
                         <div class="profile-note">创意设计 · 交互体验</div>
                     </div>
-                </div>
+                </a>
             </div>
 
             <div class="hero-visual">
                 <div class="visual-frame">
-                    <span class="visual-label">Gradientshub</span>
                     <img src="assets/images/mypicture.jpg" alt="展示图">
-                    <span class="visual-chip">Funnel Display</span>
+                    <span class="visual-label">Personal photo</span>
+                    <span class="visual-chip">lllluckyyyy</span>
                     <div class="visual-bar">
                         <span></span>
                         <span></span>
@@ -57,9 +58,15 @@
         </section>
     </div>
 
-    <footer>
-        © 2025 All Rights Reserved
-    </footer>
+        <section id="logo-loop-section" style="padding:40px 0;background:transparent;">
+            <div class="container">
+                <div id="logo-loop-root"></div>
+            </div>
+        </section>
+
+        <footer>
+                © 2025 All Rights Reserved
+        </footer>
 
     <script>
         const themeToggle = document.getElementById('themeToggle');
@@ -70,6 +77,9 @@
             if (themeToggle) {
                 themeToggle.textContent = dark ? '白天' : '夜间';
                 themeToggle.setAttribute('aria-label', dark ? '切换至白天模式' : '切换至夜间模式');
+            }
+            if (window.reloadLogoLoop) {
+                window.reloadLogoLoop();
             }
         };
         if (savedTheme) {
@@ -82,6 +92,80 @@
                 updateTheme(nextDark);
             });
         }
+
+        const visualFrame = document.querySelector('.visual-frame');
+        const visualImg = visualFrame?.querySelector('img');
+        if (visualFrame && visualImg) {
+            const maxRotate = 12;
+            visualFrame.addEventListener('pointermove', (event) => {
+                const rect = visualFrame.getBoundingClientRect();
+                const x = event.clientX - rect.left;
+                const y = event.clientY - rect.top;
+                const px = (x / rect.width - 0.5) * 2;
+                const py = (y / rect.height - 0.5) * 2;
+                const rotateY = px * maxRotate;
+                const rotateX = -py * maxRotate;
+                visualImg.style.transform = `perspective(1200px) scale(1.01) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+            visualFrame.addEventListener('pointerleave', () => {
+                visualImg.style.transform = 'perspective(1200px) scale(1) rotateX(0deg) rotateY(0deg)';
+            });
+        }
     </script>
+        <script src="./assets/js/logoloop.js"></script>
+        <script>
+            const root = document.getElementById('logo-loop-root');
+            let logoLoopDestroy = null;
+            const MANIFEST = ["XPPen1.png","XPPen2.png","YGC1.png","YGC2.png","idrive1.png","idrive2.png","loreal1.png","loreal2.png","mojiang1.png","mojiang2.png","tomatoo1.png","tomatoo2.png","XUNG1.png","XUNG2.png","zao1.png","zao2.png"];
+
+            const getTheme = () => (document.body.classList.contains('dark-theme') ? 'dark' : 'light');
+            const normalizeLogoName = name => name.replace(/\.[^.]+$/, '');
+
+            const buildLogoList = manifest => {
+                const theme = getTheme();
+                const variant = theme === 'dark' ? '1' : '2';
+                const groups = {};
+
+                manifest.forEach(name => {
+                    const match = name.match(/^(.+?)([12])(\.[^.]+)$/);
+                    if (match) {
+                        const base = normalizeLogoName(match[1]);
+                        groups[base] = groups[base] || {};
+                        groups[base][match[2]] = name;
+                    } else {
+                        const base = normalizeLogoName(name);
+                        groups[base] = groups[base] || {};
+                        groups[base].default = name;
+                    }
+                });
+
+                return Object.values(groups).map(group => {
+                    const chosen = group[variant] || group.default || group['2'] || group['1'] || Object.values(group)[0];
+                    return { src: `assets/images/logo/${chosen}`, alt: normalizeLogoName(chosen) };
+                });
+            };
+
+            const loadLogoLoop = () => {
+                const logos = buildLogoList(MANIFEST);
+                if (logoLoopDestroy) {
+                    logoLoopDestroy();
+                }
+                logoLoopDestroy = createLogoLoop(root, {
+                    logos,
+                    speed: 40,
+                    direction: 'left',
+                    logoHeight: 40,
+                    gap: 72,
+                    hoverSpeed: 0,
+                    pauseOnHover: false,
+                    fadeOut: true,
+                    scaleOnHover: true,
+                    ariaLabel: '合作项目与案例'
+                });
+            };
+
+            window.reloadLogoLoop = loadLogoLoop;
+            loadLogoLoop();
+        </script>
 </body>
 </html>

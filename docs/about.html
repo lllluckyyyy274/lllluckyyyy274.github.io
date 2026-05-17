@@ -21,24 +21,33 @@
             </div>
         </nav>
 
-        <div class="project-content">
-            <h2>个人简介</h2>
-            <p>2022 - 2026 | 辽宁大学 | 艺术设计学</p>
-            <p>专注UI视觉设计、品牌形象设计、智能硬件视觉全案创作，擅长极简科技风与年轻化品牌视觉塑造。</p>
+        <div class="about-layout">
+            <nav class="about-toc">
+                <div class="about-toc-title">目录</div>
+                <a href="#intro" class="about-toc-link active">个人简介</a>
+                <a href="#skills" class="about-toc-link">专业技能</a>
+                <a href="#contact" class="about-toc-link">联系方式</a>
+                <a href="#experience" class="about-toc-link">工作经历</a>
+            </nav>
+            <div class="project-content">
+                <h2 id="intro">个人简介</h2>
+                <p>2022 - 2026 | 辽宁大学 | 艺术设计学</p>
+                <p>专注UI视觉设计、品牌形象设计、智能硬件视觉全案创作，擅长极简科技风与年轻化品牌视觉塑造。</p>
 
-            <h2>专业技能</h2>
-            <p>PS / AI / PT / Gigma / Blender / Rhino / Keyshot / Unity </p>
-            <p>品牌形象 / 视觉规范 / UI设计 / 3D建模</p>
+                <h2 id="skills">专业技能</h2>
+                <p>PS / AI / PT / Gigma / Blender / Rhino / Keyshot / Unity </p>
+                <p>品牌形象 / 视觉规范 / UI设计 / 3D建模</p>
 
-            <h2>联系方式</h2>
-            <p>微信：l13231095084</p>
-            <p>邮箱：l13231095084@163.com</p>
+                <h2 id="contact">联系方式</h2>
+                <p>微信：l13231095084</p>
+                <p>邮箱：l13231095084@163.com</p>
 
-            <h2>工作经历</h2>
-            <p>2025.11 - 2026.2 | 广州市擎鸣游社科技有限公司 | 游戏UI</p>
-            <p>协助系统策划完成低保真效果流程演示，根据美术方面需求设计新功能流程演示</p>
-            <p>参与游戏界面整体视觉与风格定调，完成游戏界面的绘制工作，搭建通用组件库与项目UGUI知识库</p>
-            <p>对美术素材切图并在unity中进行设计与功能的还原，运用Git推入项目，配合程序与策划，排查UGUI开发中出现的显示与适配问题</p>
+                <h2 id="experience">工作经历</h2>
+                <p>2025.11 - 2026.2 | 广州市擎鸣游社科技有限公司 | 游戏UI</p>
+                <p>协助系统策划完成低保真效果流程演示，根据美术方面需求设计新功能流程演示</p>
+                <p>参与游戏界面整体视觉与风格定调，完成游戏界面的绘制工作，搭建通用组件库与项目UGUI知识库</p>
+                <p>对美术素材切图并在unity中进行设计与功能的还原，运用Git推入项目，配合程序与策划，排查UGUI开发中出现的显示与适配问题</p>
+            </div>
         </div>
     </div>
 
@@ -67,6 +76,41 @@
                 updateTheme(nextDark);
             });
         }
+    </script>
+    <script>
+        // 目录导航滚动高亮
+        const tocLinks = document.querySelectorAll('.about-toc-link');
+        const sections = [];
+        tocLinks.forEach(link => {
+            const id = link.getAttribute('href').slice(1);
+            const el = document.getElementById(id);
+            if (el) sections.push({ id, el, link });
+        });
+
+        function updateActiveToc() {
+            const scrollY = window.scrollY + 160;
+            let current = sections[0];
+            sections.forEach(sec => {
+                if (sec.el.offsetTop <= scrollY) current = sec;
+            });
+            tocLinks.forEach(l => l.classList.remove('active'));
+            if (current) current.link.classList.add('active');
+        }
+
+        window.addEventListener('scroll', updateActiveToc, { passive: true });
+        updateActiveToc();
+
+        // 平滑滚动
+        tocLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const id = link.getAttribute('href').slice(1);
+                const el = document.getElementById(id);
+                if (el) {
+                    window.scrollTo({ top: el.offsetTop - 100, behavior: 'smooth' });
+                }
+            });
+        });
     </script>
 </body>
 </html>
